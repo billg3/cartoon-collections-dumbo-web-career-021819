@@ -1,27 +1,41 @@
-def roll_call_dwarves(dwarf_array)
-  dwarf_array.each_with_index do |name, index|
-    puts "#{index+1} #{name}"
-  end
+def roll_call_dwarves(dwarves)
+  dwarves.each_with_index {|d, i| puts "#{i+1}. #{d}"}
 end
 
-def summon_captain_planet(planeteer_calls)
-  new_array = []
-  planeteer_calls.map do |call|
-    new_array << "#{call.capitalize}!"
-  end
-  return new_array
+def summon_captain_planet(array)
+  #array.each {|a| a.capitalize! << '!'}
+  #better - doesn't change original array
+  array.map {|a| a.capitalize << "!"}
 end
 
-def long_planeteer_calls(planeteer_calls)
-  planeteer_calls.any? do |call|
-  call.length > 4
-end
-end
-
-def find_the_cheese(string_array)
-  cheese_types = ["cheddar", "gouda", "camembert"]
-  string_array.each do |element|
-    if cheese_types.include?(element)
-      return element
+# original
+def long_planeteer_calls1(array)
+  array.each do |element|
+    if element.length > 4
+      return true
     end
   end
+  return false
+end
+
+# faster
+def long_planeteer_calls(array)
+  array.any? {|word| word.length > 4 }
+end
+
+#original
+def find_the_cheese(foods)
+  cheese_types = ["cheddar", "gouda", "camembert"]
+  foods.each do |food|
+    if cheese_types.include? food
+      return food
+    end
+  end
+  nil
+end
+
+#alt
+def find_the_cheese_alt(foods)
+  cheeses = %w[gouda cheddar camembert]
+  foods.find {|a_food| cheeses.include?(a_food)}
+end
